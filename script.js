@@ -3,8 +3,8 @@ var xotakerArr = [];
 var gishatichArr = [];
 var shunArr = [];
 var mardArr = [];
-var n = 40;
-var m = 40;
+var n = 15;
+var m = 15;
 var side = 15;
 
 var matrix = [];

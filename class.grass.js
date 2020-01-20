@@ -1,4 +1,8 @@
 class Grass extends LivingCreature {
+    constructor(x, y) {
+        super(x, y);
+        this.index = 1;
+    }
 
     bazmanal() {
         this.multiply++;

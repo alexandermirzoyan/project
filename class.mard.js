@@ -1,11 +1,11 @@
-class Mard {
+class Mard extends LivingCreature {
     constructor(x, y) {
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.multiply = 0;
         this.energy = 10;
         this.speed = Math.round(random(0, 2));
         this.speed2 = this.speed += 1;
+        this.index = 5;
     }
 
     stanalNorKordinatner() {
@@ -23,6 +23,7 @@ class Mard {
         return this.directions;
     }
 
+    // Override
     yntrelVandak(ch, ch1, ch2) {
         var found = [];
         var dire = this.stanalNorKordinatner();
@@ -38,7 +39,6 @@ class Mard {
         }
         return found;
     }
-
 
     walk() {
         var find = random(this.yntrelVandak(2, 3, 4));
