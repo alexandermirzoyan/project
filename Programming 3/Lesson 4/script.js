@@ -19,6 +19,6 @@ function main() {
     }
 
     socket.on('display message', handleMessage);
-} // main closing bracket
+} 
 
 window.onload = main;   
