@@ -1,11 +1,13 @@
 class Mard extends LivingCreature {
-    constructor(x, y) {
+    constructor(x, y, gender) {
         super(x,y);
         this.multiply = 0;
         this.energy = 10;
         this.speed = Math.round(random(0, 2));
         this.speed2 = this.speed += 1;
+        this.gender = gender;
         this.index = 5;
+        console.log(this.gender);
     }
 
     stanalNorKordinatner() {
@@ -90,5 +92,20 @@ class Mard extends LivingCreature {
 
         }
     }
+
+    // Need to optimize
+    // bazmanal() {
+    //     this.multiply++;
+    //     console.log(this.multiply);
+    //
+    //     var norVandak = random(this.yntrelVandak(0));
+    //
+    //     if (this.multiply >= 2 && norVandak) {
+    //         var norXot = new Mard(norVandak[0], norVandak[1], this.gender);
+    //         mardArr.push(norXot);
+    //         matrix[norVandak[1]][norVandak[0]] = 1;
+    //         this.multiply = 0;
+    //     }
+    // }
 
 }

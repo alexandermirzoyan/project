@@ -50,7 +50,9 @@ function setup() {
             }
 
             if (matrix[y][x] == 5) {
-                var mard = new Mard(x, y);
+                let genderArr = ['male', 'female'];
+                let randomFromGenderArray = genderArr[Math.floor(Math.random()*genderArr.length)];
+                var mard = new Mard(x, y, randomFromGenderArray);
                 mardArr.push(mard);
             }
 
@@ -118,6 +120,7 @@ function draw() {
 
     for (var i in mardArr) {
         mardArr[i].walk();
+        // mardArr[i].bazmanal();
     }
 
 
