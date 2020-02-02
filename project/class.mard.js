@@ -1,11 +1,12 @@
 class Mard extends LivingCreature {
-    constructor(x, y, gender) {
+    constructor(x, y, gender1, gender2) {
         super(x,y);
         this.multiply = 0;
         this.energy = 10;
         this.speed = Math.round(random(0, 2));
         this.speed2 = this.speed += 1;
-        this.gender = gender;
+        this.gender1 = gender1;
+        this.gender2 = gender2;
         this.index = 5;
         console.log(this.gender);
     }
@@ -94,18 +95,23 @@ class Mard extends LivingCreature {
     }
 
     // Need to optimize
-    // bazmanal() {
-    //     this.multiply++;
-    //     console.log(this.multiply);
-    //
-    //     var norVandak = random(this.yntrelVandak(0));
-    //
-    //     if (this.multiply >= 2 && norVandak) {
-    //         var norXot = new Mard(norVandak[0], norVandak[1], this.gender);
-    //         mardArr.push(norXot);
-    //         matrix[norVandak[1]][norVandak[0]] = 1;
-    //         this.multiply = 0;
-    //     }
-    // }
+    bazmanal() {
+        if (this.gender1 === 'male' && this.gender2 === 'female') {
+            this.multiply++;
+            // console.log(this.multiply);
+        
+            setTimeout(() => {
+                var norVandak = random(this.yntrelVandak(0));
+        
+                if (this.multiply >= 2 && norVandak) {
+                    var norXot = new Mard(norVandak[0], norVandak[1], this.gender);
+                    mardArr.push(norXot);
+                    matrix[norVandak[1]][norVandak[0]] = 1;
+                    this.multiply = 0;
+                }
+            }, 9000);
+        }
+
+    }
 
 }

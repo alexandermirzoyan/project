@@ -51,8 +51,9 @@ function setup() {
 
             if (matrix[y][x] == 5) {
                 let genderArr = ['male', 'female'];
-                let randomFromGenderArray = genderArr[Math.floor(Math.random()*genderArr.length)];
-                var mard = new Mard(x, y, randomFromGenderArray);
+                let randomFromGenderArray1 = genderArr[Math.floor(Math.random()*genderArr.length)];
+                let randomFromGenderArray2 = genderArr[Math.floor(Math.random()*genderArr.length)];
+                var mard = new Mard(x, y, randomFromGenderArray1, randomFromGenderArray2);
                 mardArr.push(mard);
             }
 
@@ -60,6 +61,21 @@ function setup() {
 
     }
 
+    event = new Event(5);
+    event.boom();
+
+}
+
+function mouseClicked(event) {
+    console.log(event);
+    if (event.pageX <= n*m && event.pageY <= m*n) {
+        alert("right place")
+    }
+    // if (value === 0) {
+    //     value = 255;
+    // } else {
+    //     value = 0;
+    // }
 }
 
 function draw() {
@@ -120,7 +136,8 @@ function draw() {
 
     for (var i in mardArr) {
         mardArr[i].walk();
-        // mardArr[i].bazmanal();
+        // console.log(mardArr[i].gender);
+        mardArr[i].bazmanal();
     }
 
 
