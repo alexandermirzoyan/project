@@ -169,15 +169,15 @@ function setup() {
                     rect(j * side, i * side, side, side);
                 }
                 else if (matrix[i][j] == 3) {
-                    fill('red');
+                    fill('#F5F7A0');
                     rect(j * side, i * side, side, side);
                 }
                 else if (matrix[i][j] == 4) {
-                    fill('purple');
+                    fill('black');
                     rect(j * side, i * side, side, side);
                 }
                 else if (matrix[i][j] == 5) {
-                    fill('blue');
+                    fill('#F35916');
                     rect(j * side, i * side, side, side);
                 }
             }

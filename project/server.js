@@ -51,9 +51,8 @@ function matrixGenerator(matrixSize, grass, grassEater, mard, gishatich, dog) {
     let customY = Math.floor(random(matrixSize));
     matrix[customY][customX] = 5;
   }
-  console.log(matrix);
 }
-matrixGenerator(5, 1, 1, 1, 1, 6);
+matrixGenerator(15, 5, 5, 5, 5, 5);
 //! Creating MATRIX -- END
 
 
@@ -88,8 +87,8 @@ function creatingObjects() {
         let genderArr = ['male', 'female'];
         let randomFromGenderArray1 = genderArr[Math.floor(Math.random()*genderArr.length)];
         let randomFromGenderArray2 = genderArr[Math.floor(Math.random()*genderArr.length)];
-        var mard = new Mard(x, y, randomFromGenderArray1, randomFromGenderArray2)
-        mardArr.push(mard)
+        var mard = new Mard(x, y, randomFromGenderArray1, randomFromGenderArray2);
+        mardArr.push(mard);
       }
       else if (matrix[y][x] == 4) {
         var gishatich = new Gishatich(x, y);
@@ -103,6 +102,30 @@ function creatingObjects() {
   }
 }
 creatingObjects();
+
+let weather = 'Spring';
+let weatherID = 1;
+function changeWeather() {
+  switch (weatherID) {
+    case 1:
+      weather = 'Summer';
+      weatherID++
+      break;
+    case 2:
+      weather = 'Autumn';
+      weatherID++;
+      break;
+    case 3:
+      weather = 'Winter';
+      weatherID++;
+      break;
+    case 4:
+      weather = 'Spring';
+      weatherID++;
+    case 5:
+      weatherID = 1;
+  }
+}
 
 function game() {
   if (grassArr[0] !== undefined) {
@@ -137,6 +160,10 @@ function game() {
       dogArr[i].mah();
     }
   }
+
+  changeWeather();
+  console.log(weather);
+  console.log(weatherID);
 
   let sendData = {
     matrix: matrix,
