@@ -57,14 +57,20 @@ matrixGenerator(15, 5, 5, 5, 5, 5);
 
 
 //! SERVER STUFF  --  START
+var fs = require('fs');  //ֆայլերի մեջ գրել և կարդալու համար
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var statData = []; //ստատիստիկան պահպանող օբյեկտների զանգվածը
 
 app.use(express.static('.'));
 app.get('/', (req, res) => {
   res.redirect('index.html');
+});
+// stats path
+app.get('/stats', function (req, res) {
+  res.redirect('stats.html');
 });
 
 server.listen(3000, () => {
@@ -109,7 +115,7 @@ function changeWeather() {
   switch (weatherID) {
     case 1:
       weather = 'Summer';
-      weatherID++
+      weatherID++;
       break;
     case 2:
       weather = 'Autumn';
@@ -122,8 +128,10 @@ function changeWeather() {
     case 4:
       weather = 'Spring';
       weatherID++;
+      break;
     case 5:
       weatherID = 1;
+      break;
   }
 }
 
@@ -161,16 +169,59 @@ function game() {
     }
   }
 
-  changeWeather();
-  console.log(weather);
-  console.log(weatherID);
-
   let sendData = {
     matrix: matrix,
+    weather: {
+      weather: weather,
+      weatherID: weatherID,
+    }
+  };
+
+  let stats = {
+    grassCount: 0,
+    grassEaterCount: 0,
+    personCount: 0,
+    gishatichCount: 0,
+    dogCount: 0,
+  };
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      switch (matrix[i][j]) {
+        case 1:
+          stats.grassCount++;
+          break;
+        case 2:
+          stats.grassEaterCount++;
+          break;
+        case 3:
+          stats.personCount++;
+          break;
+        case 4:
+          stats.gishatichCount++;
+          break;
+        case 5:
+          stats.dogCount++;
+          break;
+      }
+    }
   }
 
-  //! Send data over the socket to clients who listens "data"
+  //! Send data over the socket to clients who listens "data" and "statistics"
   io.sockets.emit("data", sendData);
+  io.sockets.emit("statistics", stats);
+}
+
+function weatherSocket() {
+  changeWeather();
+
+  let sendData = {
+    weather: {
+      weather: weather,
+      weatherID: weatherID,
+    }
+  };
+  io.sockets.emit("weather", sendData);
 }
 
 setInterval(game, 1000);
+setInterval(weatherSocket, 4000);

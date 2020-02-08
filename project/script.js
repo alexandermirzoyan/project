@@ -148,11 +148,30 @@ function setup() {
     var matrix = [];
 
     socket.on("data", drawCreatures);
+    socket.on("weather", drawWeather);
+
+    function drawWeather(data) {
+        console.log(data);
+        console.log(data.weather.weather);
+        switch (data.weather.weather) {
+            case "Spring":
+                document.getElementById("weather-name").innerText = "Spring";
+                break;
+            case "Summer":
+                document.getElementById("weather-name").innerText = "Summer";
+                break;
+            case "Autumn":
+                document.getElementById("weather-name").innerText = "Autumn";
+                break;
+            case "Winter":
+                document.getElementById("weather-name").innerText = "Winter";
+                break;
+        }
+    }
 
     function drawCreatures(data) {
-        // Every 1 second by setInterval with socket we revieve data
+        // Every 1 second by setInterval with socket we receive data
         console.log(data);
-        console.log(data.matrix);
 
         matrix = data.matrix;
         createCanvas(matrix[0].length * side, matrix.length * side);
@@ -161,7 +180,18 @@ function setup() {
         for (var i = 0; matrix.length; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
-                    fill('green');
+                    if (data.weather.weather === "Winter") {
+                        fill('#B8F19F');
+                    }
+                    else if (data.weather.weather === "Spring") {
+                        fill('green');
+                    }
+                    else if (data.weather.weather === "Summer") {
+                        fill('#12EC0B');
+                    }
+                    else if (data.weather.weather === "Winter") {
+                        fill('#849008');
+                    }
                     rect(j * side, i * side, side, side);
                 }
                 else if (matrix[i][j] == 2) {
