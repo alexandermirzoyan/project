@@ -61,6 +61,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+const fs = require('fs');
 
 app.use(express.static('.'));
 app.get('/', (req, res) => {
@@ -205,6 +206,13 @@ function game() {
     }
   }
 
+  fs.writeFile("statistics.json", JSON.stringify(stats), "utf-8", (error) => {
+    if (error) {
+      console.log("An error occured while writing JSON Object to File.");
+      return console.log(error);
+    }
+  });
+
   //! Send data over the socket to clients who listens "data" and "statistics"
   io.sockets.emit("data", sendData);
   io.sockets.emit("statistics", stats);
@@ -225,7 +233,6 @@ function weatherSocket() {
 io.on('connection', (socket) => {
   socket.on('event', (data) => {
     if (!data.hasOwnProperty(0)) {
-      console.log("true");
       matrixGenerator(15, 15*15, 0, 0, 0, 0);
       let sendData = {
         matrix: matrix,
@@ -235,7 +242,6 @@ io.on('connection', (socket) => {
         }
       };
       io.sockets.emit("data", sendData);
-      console.log(matrix);
     }
   })
 })
