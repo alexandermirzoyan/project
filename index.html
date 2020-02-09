@@ -3,26 +3,23 @@
 <head>
 	<title>Game of Life</title>
 	<meta charset="utf8">
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 	<a id="stats-link" href="/stats.html">Live Statistics</a>
-	<p>It's very simple to make nature green again, just click somewhere!</p>
+	<div id=container>
+		<p>Just click somewhere!</p>
+		Make
+		<div id=flip>
+			<div><div>Green</div></div>
+			<div><div>Clear</div></div>
+			<div><div>Your Own</div></div>
+		</div>
+		Nature!
+	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
-	<style>
-		body {
-			margin: 0;
-		}
-		a {
-			background: #66ff04;
-			color: white;
-			border-radius: 5px;
-			padding: 10px 20px;
-			text-align: center;
-			font-size: 16px;
-		}
-	</style>
 	<h1 id="weather-name"></h1>
 </body>
 </html>
